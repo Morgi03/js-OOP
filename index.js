@@ -15,10 +15,10 @@ let valami = {
 class User {
 
     #eletkor = 0;
-
+    nev;
     constructor(nev,eletkor) {
         this.nev = nev;
-        this.eletkor = eletkor;
+        this.#eletkor = eletkor;
     }
 
     // Getter, Setter
@@ -36,7 +36,7 @@ class User {
 
     // Metódusok
     kiir() {
-        console.log(this, this.nev, this._eletkor);
+        console.log(this.nev, this._eletkor);
     }
 
     login(usernev, pass) {
@@ -45,9 +45,31 @@ class User {
     #privatmetodus(){
         console.log('privát metódus')
     }
+
+    static atlagEletkor(users) {
+        let sum = 0;
+        for (let u of users) {
+            sum += u.#eletkor;
+        }
+        return sum / users.length;
+    }
+
 }
 
-let user = new User("User2", 19)
+let user = new User("User2",25);
+let userek = [
+    user,
+    new User("User5",2),
+    new User("User1",3),
+];
+let atlag = User.atlagEletkor(userek);
+console.log("Az atlag: "+atlag)
+
+
+
+
+
+// let user = new User("User2", 19)
 
 // User osztályunknak nem példánya:
 console.log(valami instanceof User);
@@ -69,11 +91,15 @@ console.log(user.kiir());
 let k = user.kiir;
 // k(); hiba lesz
 let obj = {
-    nev: nev,
+    nev: 'nev',
     eletkor: 999,
     kiir: user.kiir,
 }
 console.log(user.kiir());
 obj.kiir();
 
-document.getElementById('gomb').addEventListener('click',user.kiir);
+function gombKattintas(){
+    user.kiir();
+}
+
+// document.getElementById('gomb').addEventListener('click',gombKattintas);
