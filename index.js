@@ -2,7 +2,13 @@
 
 let valami = {
     nev: "Usernev",
-    eletkor:23,
+    _eletkor:23,
+    kiir(){
+        console.log(this.nev);
+    },
+    get eletkor(){
+        return this._eletkor;
+    },
 };
 
 // Konstruktor
@@ -30,7 +36,7 @@ class User {
 
     // Metódusok
     kiir() {
-        console.log(this.nev, this._eletkor);
+        console.log(this, this.nev, this._eletkor);
     }
 
     login(usernev, pass) {
@@ -52,3 +58,22 @@ user.kiir();
 // user.eletkor = "kutya"; hiba lesz
 // user._eletkor = "kutya"; Nincs hiba :O ezért kell private -> #eletkor
 // user.#eletkor = "kutya"; Hibás lesz
+
+
+console.log(User); // objectumok a classok :O :O :O 
+
+valami.kiir();
+
+console.log('------------------------');
+console.log(user.kiir());
+let k = user.kiir;
+// k(); hiba lesz
+let obj = {
+    nev: nev,
+    eletkor: 999,
+    kiir: user.kiir,
+}
+console.log(user.kiir());
+obj.kiir();
+
+document.getElementById('gomb').addEventListener('click',user.kiir);
