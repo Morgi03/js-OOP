@@ -7,6 +7,9 @@ let valami = {
 
 // Konstruktor
 class User {
+
+    #eletkor = 0;
+
     constructor(nev,eletkor) {
         this.nev = nev;
         this.eletkor = eletkor;
@@ -14,14 +17,14 @@ class User {
 
     // Getter, Setter
     get eletkor(){
-        return this._eletkor;
+        return this.#eletkor;
     }
 
     set eletkor(eletkor){
         if (typeof eletkor == 'number' && eletkor >= 0) {
             this._eletkor = eletkor;
         } else {
-            throw new Error('Eletkor nem lehet negatív egész!');
+            throw new Error('Eletkor nem lehet negatív, vigyázzon kérem!');
         }
     }
 
@@ -32,6 +35,9 @@ class User {
 
     login(usernev, pass) {
         return false;
+    }
+    #privatmetodus(){
+        console.log('privát metódus')
     }
 }
 
@@ -44,3 +50,5 @@ console.log(user instanceof User);
 
 user.kiir();
 // user.eletkor = "kutya"; hiba lesz
+// user._eletkor = "kutya"; Nincs hiba :O ezért kell private -> #eletkor
+// user.#eletkor = "kutya"; Hibás lesz
